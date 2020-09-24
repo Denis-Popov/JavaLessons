@@ -20,6 +20,12 @@ public class Customer {
         }else {
             System.out.println("У клиента " + fullName(name, lastName) + " уже есть открытый аккаунт.");
         }
+
+        if (closeAccount(name,lastName, account.id)){
+            System.out.println("Клиенту " + fullName(name,lastName) + " закрыт аккаунт");
+        }else {
+            System.out.println("У клиента " + fullName(name,lastName) + " нет открытых аккаунтов.");
+        }
     }
 
     /**
@@ -32,9 +38,7 @@ public class Customer {
     public boolean openAccount(long accountId,String name, String lastName) {
         // write your code here
         if (accountId>1) {
-
             return false;
-
         }else{
             accountId += 1;
             return true;
@@ -49,7 +53,7 @@ public class Customer {
     public boolean closeAccount(String name, String lastName,long accountId) {
         // write your code here
         if (accountId==0){
-            System.out.println("У клиента " + fullName(name,lastName) + " нет открытых аккаунтов.");
+
             return false;
         }else{
             return true;
