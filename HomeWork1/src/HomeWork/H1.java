@@ -16,15 +16,15 @@ public class Customer {
         this.lastName = nm.next();
 
         if (openAccount(account.id, name, lastName)) {
-            System.out.println("Клиенту " + fullName(name, lastName) + " создан аккаунт!");
+            System.out.println("Клиенту " + fullName + " создан аккаунт!");
         }else {
-            System.out.println("У клиента " + fullName(name, lastName) + " уже есть открытый аккаунт.");
+            System.out.println("У клиента " + fullName + " уже есть открытый аккаунт.");
         }
 
         if (closeAccount(name,lastName, account.id)){
-            System.out.println("Клиенту " + fullName(name,lastName) + " закрыт аккаунт");
+            System.out.println("Клиенту " + fullName + " закрыт аккаунт");
         }else {
-            System.out.println("У клиента " + fullName(name,lastName) + " нет открытых аккаунтов.");
+            System.out.println("У клиента " + fullName + " нет открытых аккаунтов.");
         }
     }
 
@@ -53,7 +53,6 @@ public class Customer {
     public boolean closeAccount(String name, String lastName,long accountId) {
         // write your code here
         if (accountId==0){
-
             return false;
         }else{
             return true;
@@ -63,11 +62,12 @@ public class Customer {
      * Formatted full name of the customer
      * @return concatenated form of name and lastName, e.g. "John Goodman"
      */
+
     public String fullName() { //не понимаю, почему тут ошибка
         // write your code here
             if (name.equals(null) | lastName.equals(null)) {
-                final String s = name + " " + lastName;
-                return s;
+            }else {
+                fullName = name + " " + lastName;
             }
 
     }
@@ -109,6 +109,12 @@ public class Account {
      */
     public boolean withdraw(double amount) {
         // write your code here
+        if(balance-amount>=0) {
+            balance-=amount;
+            return true;
+        }else{
+            return false;
+        }
     }
 
     /**
@@ -119,6 +125,8 @@ public class Account {
      */
     public boolean add(double amount) {
         // write your code here
+        balance+=amount;
+        return true;
     }
 }
 
