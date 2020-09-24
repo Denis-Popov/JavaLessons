@@ -7,8 +7,19 @@ public class Customer {
     private Account account;
 
     public Customer(String name, String lastName) {
-        this.name = name;
-        this.lastName = lastName;
+
+        Scanner nm = new Scanner(System.in);
+        System.out.println("Введите имя Клиента: ");
+        this.name = nm.next();
+
+        System.out.println("Введите фамилию Клиента: ");
+        this.lastName = nm.next();
+
+        if (openAccount(account.id, name, lastName)) {
+            System.out.println("Клиенту " + fullName(name, lastName) + " создан аккаунт!");
+        }else {
+            System.out.println("У клиента " + fullName(name, lastName) + " уже есть открытый аккаунт.");
+        }
     }
 
     /**
@@ -21,7 +32,7 @@ public class Customer {
     public boolean openAccount(long accountId,String name, String lastName) {
         // write your code here
         if (accountId>1) {
-            System.out.println("У клиента " + fullName(name, lastName) + " уже есть открытый аккаунт.");
+
             return false;
 
         }else{
@@ -48,7 +59,7 @@ public class Customer {
      * Formatted full name of the customer
      * @return concatenated form of name and lastName, e.g. "John Goodman"
      */
-    public String fullName(name,lastName) {
+    public String fullName() { //не понимаю, почему тут ошибка
         // write your code here
             if (name.equals(null) | lastName.equals(null)) {
                 final String s = name + " " + lastName;
