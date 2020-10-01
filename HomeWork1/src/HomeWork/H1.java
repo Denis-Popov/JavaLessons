@@ -2,8 +2,8 @@ package HomeWork;
 import java.util.Scanner;
 
 public class Customer {
-    private final String name;
-    private final String lastName;
+    private String name;
+    private String lastName;
     private Account account;
 
     public Customer(String name, String lastName) {
@@ -16,15 +16,15 @@ public class Customer {
         this.lastName = nm.next();
 
         if (openAccount(account.id, name, lastName)) {
-            System.out.println("Клиенту " + fullName + " создан аккаунт!");
+            System.out.println("Клиенту " + fullName(name, lastName) + " создан аккаунт!");
         }else {
-            System.out.println("У клиента " + fullName + " уже есть открытый аккаунт.");
+            System.out.println("У клиента " + fullName(name, lastName) + " уже есть открытый аккаунт.");
         }
 
         if (closeAccount(name,lastName, account.id)){
-            System.out.println("Клиенту " + fullName + " закрыт аккаунт");
+            System.out.println("Клиенту " + fullName(name, lastName) + " закрыт аккаунт");
         }else {
-            System.out.println("У клиента " + fullName + " нет открытых аккаунтов.");
+            System.out.println("У клиента " + fullName(name, lastName) + " нет открытых аккаунтов.");
         }
     }
 
@@ -35,8 +35,7 @@ public class Customer {
      * @param accountId id of the account
      * @return true if account hasn't already created, otherwise returns false and prints "Customer fullName() already has the active account"
      */
-    public boolean openAccount(long accountId,String name, String lastName) {
-        // write your code here
+    public boolean openAccount(long accountId) {
         if (accountId>1) {
             return false;
         }else{
@@ -50,7 +49,7 @@ public class Customer {
      *
      * @return false if account is already null and prints "Customer fullName() has no active account to close", otherwise sets account to null and returns true
      */
-    public boolean closeAccount(String name, String lastName,long accountId) {
+    public boolean closeAccount(long accountId) {
         // write your code here
         if (accountId==0){
             return false;
@@ -63,14 +62,11 @@ public class Customer {
      * @return concatenated form of name and lastName, e.g. "John Goodman"
      */
 
-    public String fullName() { //не понимаю, почему тут ошибка
-        // write your code here
-            if (name.equals(null) | lastName.equals(null)) {
-            }else {
-                fullName = name + " " + lastName;
-            }
-
+    public String fullName() {
+        if (name != null && lastName != null)
+        return name + " " + lastname;
     }
+
 
     /**
      * Delegates withdraw to Account class
@@ -108,9 +104,8 @@ public class Account {
      * otherwise returns false
      */
     public boolean withdraw(double amount) {
-        // write your code here
-        if(balance-amount>=0) {
-            balance-=amount;
+        if(balance - amount >= 0) {
+            balance -= amount;
             return true;
         }else{
             return false;
