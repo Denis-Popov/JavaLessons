@@ -15,16 +15,16 @@ public class Customer {
         System.out.println("Введите фамилию Клиента: ");
         this.lastName = nm.next();
 
-        if (openAccount(account.id)) {
-            System.out.println("Клиенту " + fullName(name, lastName) + " создан аккаунт!");
+        if (openAccount(Account.id)) {
+            System.out.println("Клиенту " + fullName() + " создан аккаунт!");
         }else {
-            System.out.println("У клиента " + fullName(name, lastName) + " уже есть открытый аккаунт.");
+            System.out.println("У клиента " + fullName() + " уже есть открытый аккаунт.");
         }
 
-        if (closeAccount(account.id)){
-            System.out.println("Клиенту " + fullName(name, lastName) + " закрыт аккаунт");
+        if (closeAccount(Account.id)){
+            System.out.println("Клиенту " + fullName() + " закрыт аккаунт");
         }else {
-            System.out.println("У клиента " + fullName(name, lastName) + " нет открытых аккаунтов.");
+            System.out.println("У клиента " + fullName() + " нет открытых аккаунтов.");
         }
     }
 
@@ -38,10 +38,8 @@ public class Customer {
     public boolean openAccount(long accountId) {
         if (accountId>1) {
             return false;
-        }else{
-            accountId += 1;
-            return true;
         }
+            return true;
     }
 
     /**
@@ -53,9 +51,9 @@ public class Customer {
         // write your code here
         if (accountId == 0) {
             return false;
-        } else {
-            return true;
         }
+        return true;
+
     }
 
     /**
@@ -67,6 +65,7 @@ public class Customer {
         if (name != null && lastName != null) {
             return name + " " + lastName;
         }
+        return null;
     }
 
 
@@ -77,7 +76,12 @@ public class Customer {
      * @return false if account is null and prints "Customer fullName() has no active account", otherwise returns the result of Account's withdraw method
      */
     public boolean withdrawFromCurrentAccount(double amount) {
-        // write your code here
+        if (account == null) {
+            System.out.println("У клиента " + fullName() + "нет активного аккаунта!");
+            return false;
+        }
+        return Customer.withdraw(amount);
+
     }
 
     /**
@@ -86,12 +90,17 @@ public class Customer {
      * @return false if account is null and prints "Customer fullName() has no active account", otherwise returns the result of Account's add method
      */
     public boolean addMoneyToCurrentAccount(double amount) {
-        // write your code here
+        if (account == null) {
+            System.out.println("У клиента " + fullName() + "нет активного аккаунта!");
+            return false;
+        }
+        return Customer.add(amount);
     }
 }
 
 public class Account {
     private final long id;
+    public long id;
     private double balance;
 
     public Account(long id) {
@@ -107,12 +116,11 @@ public class Account {
      * otherwise returns false
      */
     public boolean withdraw(double amount) {
-        if(balance - amount >= 0) {
+        if(balance - amount >= 0 && amount != 0) {
             balance -= amount;
             return true;
-        }else{
-            return false;
         }
+        return false;
     }
 
     /**
@@ -123,8 +131,11 @@ public class Account {
      */
     public boolean add(double amount) {
         // write your code here
-        balance+=amount;
-        return true;
+        if (amount!=0) {
+            balance += amount;
+            return true;
+        }
+        return false;
     }
 }
 
