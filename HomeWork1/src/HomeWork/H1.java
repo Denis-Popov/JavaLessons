@@ -63,9 +63,11 @@ public class Customer {
      */
 
     public String fullName() {
-        if (name != null && lastName != null)
-        return name + " " + lastname;
+        if (name != null && lastName != null) {
+            return name + " " + lastName;
+        }
     }
+
 
 
     /**
