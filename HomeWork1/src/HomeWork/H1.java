@@ -15,13 +15,13 @@ public class Customer {
         System.out.println("Введите фамилию Клиента: ");
         this.lastName = nm.next();
 
-        if (openAccount(account.id, name, lastName)) {
+        if (openAccount(account.id)) {
             System.out.println("Клиенту " + fullName(name, lastName) + " создан аккаунт!");
         }else {
             System.out.println("У клиента " + fullName(name, lastName) + " уже есть открытый аккаунт.");
         }
 
-        if (closeAccount(name,lastName, account.id)){
+        if (closeAccount(account.id)){
             System.out.println("Клиенту " + fullName(name, lastName) + " закрыт аккаунт");
         }else {
             System.out.println("У клиента " + fullName(name, lastName) + " нет открытых аккаунтов.");
@@ -51,11 +51,12 @@ public class Customer {
      */
     public boolean closeAccount(long accountId) {
         // write your code here
-        if (accountId==0){
+        if (accountId == 0) {
             return false;
-        }else{
+        } else {
             return true;
         }
+    }
 
     /**
      * Formatted full name of the customer
