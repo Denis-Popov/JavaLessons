@@ -5,27 +5,20 @@ public class Customer {
     private String name;
     private String lastName;
     private Account account;
+    private long id;
 
     public Customer(String name, String lastName) {
-
+/**
         Scanner nm = new Scanner(System.in);
         System.out.println("Введите имя Клиента: ");
         this.name = nm.next();
 
         System.out.println("Введите фамилию Клиента: ");
         this.lastName = nm.next();
+*/
 
-        if (openAccount(Account.id)) {
-            System.out.println("Клиенту " + fullName() + " создан аккаунт!");
-        }else {
-            System.out.println("У клиента " + fullName() + " уже есть открытый аккаунт.");
-        }
-
-        if (closeAccount(Account.id)){
-            System.out.println("Клиенту " + fullName() + " закрыт аккаунт");
-        }else {
-            System.out.println("У клиента " + fullName() + " нет открытых аккаунтов.");
-        }
+        openAccount(id);
+        closeAccount(id);
     }
 
     /**
@@ -37,9 +30,11 @@ public class Customer {
      */
     public boolean openAccount(long accountId) {
         if (accountId>1) {
+            System.out.println("У клиента " + fullName() + " уже есть открытый аккаунт.");
             return false;
         }
-            return true;
+        System.out.println("Клиенту " + fullName() + " создан аккаунт!");
+        return true;
     }
 
     /**
@@ -50,8 +45,10 @@ public class Customer {
     public boolean closeAccount(long accountId) {
         // write your code here
         if (accountId == 0) {
+            System.out.println("У клиента " + fullName() + " нет открытых аккаунтов.");
             return false;
         }
+        System.out.println("Клиенту " + fullName() + " закрыт аккаунт");
         return true;
 
     }
@@ -80,7 +77,7 @@ public class Customer {
             System.out.println("У клиента " + fullName() + "нет активного аккаунта!");
             return false;
         }
-        return Customer.withdraw(amount);
+        return Account.withdraw(amount);
 
     }
 
@@ -94,14 +91,13 @@ public class Customer {
             System.out.println("У клиента " + fullName() + "нет активного аккаунта!");
             return false;
         }
-        return Customer.add(amount);
+        return Account.add(amount);
     }
 }
 
 public class Account {
-    private final long id;
     public long id;
-    private double balance;
+    private static double balance;
 
     public Account(long id) {
         this.id = id;
@@ -115,7 +111,7 @@ public class Account {
      * if amount &gt 0 and (balance - amount) &gt 0,
      * otherwise returns false
      */
-    public boolean withdraw(double amount) {
+    public static boolean withdraw(double amount) {
         if(balance - amount >= 0 && amount != 0) {
             balance -= amount;
             return true;
@@ -129,7 +125,7 @@ public class Account {
      * @param amount amount of money to add on account
      * @return true if amount &gt 0, otherwise returns false
      */
-    public boolean add(double amount) {
+    public static boolean add(double amount) {
         // write your code here
         if (amount!=0) {
             balance += amount;
