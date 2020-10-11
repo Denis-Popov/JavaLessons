@@ -1,3 +1,7 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Collection;
+
 public class Account {
     private final long id;
     private final TransactionManager transactionManager;
@@ -69,7 +73,7 @@ public class Account {
      * @param date
      * @return balance
      */
-    public double balanceOn(LocalDate date) {
+    public double balanceOn(LocalDateTime date) {
         // write your code here
     }
 
@@ -178,10 +182,14 @@ public class AnalyticsManager {
     }
 
     public Account mostFrequentBeneficiaryOfAccount(Account account) {
-        // write your code here
+        // определить самые частые операции в аккаунте
+        
     }
 
     public Collection<Transaction> topTenExpensivePurchases(Account account) {
-        // write your code here
+        //сортировка
+
+
+        //вывод самых дорогих операций
     }
 }
