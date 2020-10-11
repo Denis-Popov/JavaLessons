@@ -1,5 +1,4 @@
 package HomeWork;
-import java.util.Scanner;
 
 public class Customer {
     private String name;
@@ -9,13 +8,13 @@ public class Customer {
 
     public Customer(String name, String lastName) {
 /**
-        Scanner nm = new Scanner(System.in);
-        System.out.println("Введите имя Клиента: ");
-        this.name = nm.next();
+ Scanner nm = new Scanner(System.in);
+ System.out.println("Введите имя Клиента: ");
+ this.name = nm.next();
 
-        System.out.println("Введите фамилию Клиента: ");
-        this.lastName = nm.next();
-*/
+ System.out.println("Введите фамилию Клиента: ");
+ this.lastName = nm.next();
+ */
 
         openAccount(id);
         closeAccount(id);
@@ -29,7 +28,7 @@ public class Customer {
      * @return true if account hasn't already created, otherwise returns false and prints "Customer fullName() already has the active account"
      */
     public boolean openAccount(long accountId) {
-        if (accountId>1) {
+        if (accountId > 1) {
             System.out.println("У клиента " + fullName() + " уже есть открытый аккаунт.");
             return false;
         }
@@ -55,6 +54,7 @@ public class Customer {
 
     /**
      * Formatted full name of the customer
+     *
      * @return concatenated form of name and lastName, e.g. "John Goodman"
      */
 
@@ -66,9 +66,9 @@ public class Customer {
     }
 
 
-
     /**
      * Delegates withdraw to Account class
+     *
      * @param amount
      * @return false if account is null and prints "Customer fullName() has no active account", otherwise returns the result of Account's withdraw method
      */
@@ -83,6 +83,7 @@ public class Customer {
 
     /**
      * Delegates adding money to Account class
+     *
      * @param amount
      * @return false if account is null and prints "Customer fullName() has no active account", otherwise returns the result of Account's add method
      */
@@ -94,44 +95,3 @@ public class Customer {
         return Account.add(amount);
     }
 }
-
-public class Account {
-    public long id;
-    private static double balance;
-
-    public Account(long id) {
-        this.id = id;
-    }
-
-    /**
-     * Withdraws money from account balance
-     *
-     * @param amount amount of money to withdraw
-     * @return true
-     * if amount &gt 0 and (balance - amount) &gt 0,
-     * otherwise returns false
-     */
-    public static boolean withdraw(double amount) {
-        if(balance - amount >= 0 && amount != 0) {
-            balance -= amount;
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * Adds money to account balance
-     *
-     * @param amount amount of money to add on account
-     * @return true if amount &gt 0, otherwise returns false
-     */
-    public static boolean add(double amount) {
-        // write your code here
-        if (amount!=0) {
-            balance += amount;
-            return true;
-        }
-        return false;
-    }
-}
-
